@@ -251,6 +251,10 @@ figure.highlight {
   font-family: Georgia;
   src: url("./fonts/Georgia.ttf");
 }
+@font-face {
+  font-family: JiZiJingDianDaBiaoSongJianFan;
+  src: url("fonts/JiZiJingDianDaBiaoSongJianFan.ttf");
+}
 * {
   -webkit-text-size-adjust: none;
 }
@@ -268,13 +272,13 @@ body {
   color: #494e52;
   font-size: 1.8em;
   line-height: 1.5;
-  font-family: Georgia, FangSong, STFangsong, sans-serif;
+  font-family: Georgia, JiZiJingDianDaBiaoSongJianFan, FangSong, STFangsong, sans-serif;
   scroll-behavior: smooth;
 }
 a,
 span,
 .btn {
-  font-family: Georgia, FangSong, STFangsong, sans-serif;
+  font-family: Georgia, JiZiJingDianDaBiaoSongJianFan, FangSong, STFangsong, sans-serif;
 }
 img {
   max-width: 100%;
@@ -514,7 +518,7 @@ blockquote p {
   text-align: right;
 }
 .page article code {
-  font-family: Georgia, FangSong, STFangsong, sans-serif;
+  font-family: Georgia, JiZiJingDianDaBiaoSongJianFan, FangSong, STFangsong, sans-serif;
   padding: 0.2rem 0.3rem;
   background: rgba(27,31,35,0.05);
   word-wrap: break-word;

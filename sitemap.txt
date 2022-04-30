@@ -1,7 +1,6 @@
 http://example.com/2022/04/29/index/
+http://example.com/honors/index.html
 http://example.com/contact/index.html
 http://example.com/publications/index.html
-http://example.com/honors/index.html
-http://example.com/blogs/index.html
 http://example.com/activities/index.html
 http://example.com/
