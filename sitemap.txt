@@ -1,6 +1,6 @@
-http://example.com/2022/04/29/index/
-http://example.com/honors/index.html
-http://example.com/contact/index.html
-http://example.com/publications/index.html
-http://example.com/activities/index.html
-http://example.com/
+https://tfeilyu.github.io/2022/04/29/index/
+https://tfeilyu.github.io/honors/index.html
+https://tfeilyu.github.io/contact/index.html
+https://tfeilyu.github.io/publications/index.html
+https://tfeilyu.github.io/activities/index.html
+https://tfeilyu.github.io/
