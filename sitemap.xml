@@ -13,7 +13,16 @@
   <url>
     <loc>https://tfeilyu.github.io/blogs/Awesome_AutoML_on_Graphs.html</loc>
     
-    <lastmod>2022-09-16</lastmod>
+    <lastmod>2022-09-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tfeilyu.github.io/honours/index.html</loc>
+    
+    <lastmod>2022-09-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -41,15 +50,6 @@
     <loc>https://tfeilyu.github.io/contact/index.html</loc>
     
     <lastmod>2022-07-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://tfeilyu.github.io/honours/index.html</loc>
-    
-    <lastmod>2022-06-26</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
