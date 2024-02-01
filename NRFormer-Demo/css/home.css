@@ -1,0 +1,110 @@
+/* 导航栏样式 */
+.navbar {
+    background-color: #2d70e3;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+}
+.href-a {
+    text-decoration: none; /* 取消下划线 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+.home-con {
+    display: flex;
+    width: 100%;
+    height: 800px;
+    flex-direction: row;
+    margin: 110px 0;
+    justify-content: center;
+}
+
+.home-left {
+    width: 45%;
+}
+
+.home-left-cont {
+    height: 97.6%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    padding: 20px;
+    border-radius: 10px;
+    /*margin-top: -60px;*/
+    width: 90%;
+    background-color: #ffffff;
+}
+
+.home-right {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.right-top {
+    width: 100%;
+    height: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.right-bottom {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.right-right {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 48%;
+    height: 50%;
+}
+
+.right-left {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 48%;
+    height: 50%;
+}
+
+.all-echarts-item {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
