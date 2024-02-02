@@ -99,7 +99,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     border-radius: 10px;
     background-color: #ffffff;
-    width: 48%;
+    width: 100%;
     height: 50%;
 }
 
@@ -107,4 +107,24 @@ body {
     width: 100%;
     height: 100%;
     border: none;
+}
+.home-all{
+    display: flex;
+    flex-direction: column;
+}
+.home-bottom{
+    /*display: flex;*/
+    /*justify-content: space-evenly;*/
+    width: 100%;
+    height: 500px;
+    margin-bottom: 30px;
+}
+
+.hom-bottom-heat{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 90.6%;
+    height: 500px;
+    margin: 0 auto;
 }

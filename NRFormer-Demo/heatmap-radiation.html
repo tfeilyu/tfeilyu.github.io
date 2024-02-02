@@ -10,16 +10,136 @@
   <style>
     /* 设置容器的宽度和高度 */
     #chart-container {
-      width: 800px;
-      height: 800px;
+      width: 700px;
+      height: 760px;
       margin: 0 auto;
     }
   </style>
 </head>
 <body>
-  <!-- 创建一个容器 -->
-  <div id="chart-container"></div>
-  <!-- 引入 JavaScript 代码 -->
-  <script src="js/heatmap-radiation.js"></script>
+<!-- 创建一个容器 -->
+<div id="chart-container"></div>
+<!-- 引入 JavaScript 代码 -->
+<script>
+  // 获取容器元素
+  var container = document.getElementById('chart-container');
+  // 初始化 ECharts 实例
+  var myChart = echarts.init(container);
+
+  // 显示加载动画
+  // myChart.showLoading();
+
+  // 定义 visualMap 的默认配置
+  var visualMapConfig = {
+    min: 20,
+    max: 60,
+    // range: [4, 15],
+    // calculable: true,
+    splitNumber: 5,
+    orient: 'vertical',
+    right: 0,
+    bottom: '5%',
+    inRange: {
+      color: ['blue', 'green', 'yellow', 'red']
+    },
+    textStyle: {
+      color: '#000'
+    }
+  };
+
+  // 定义起始和结束日期
+  var startDate = new Date('2021-04-10');
+  var endDate = new Date('2023-12-19');
+
+  // 初始化当前日期
+  var currentDate = startDate;
+
+  // 加载地图数据
+  $.get('json/japan.geojson', function (geoJson) {
+    // 注册地图
+    echarts.registerMap('Japan', geoJson);
+
+    function switchFile() {
+      var folderPath = 'hotPostMapData/';
+      var currentFileName = currentDate.toISOString().split('T')[0] + '.json';
+
+      myChart.setOption({
+        title: {
+          text: folderPath + currentFileName,
+          left: 'center'
+        },
+        // 设置 legend 位置为 'bottom'，对齐方式为 'right'
+        legend: {
+          orient: 'horizontal',
+          top: 'top',
+          left: 'left'
+        },
+      });
+
+      console.log(folderPath + currentFileName);
+      // 加载节点数据
+      $.get(folderPath + currentFileName, function (nodeData) {
+        console.log(nodeData[898]);
+        // 设置图表的配置项和数据
+        myChart.setOption({
+          geo: {
+            map: 'Japan',
+            roam: false,
+            zoom:2,
+            center: [139, 39],
+          },
+          series: [
+            {
+              name: '热力',
+              type: 'heatmap',
+              coordinateSystem: 'geo',
+              data: nodeData.map(function (item) {
+                // 转换成热力图需要的数据格式
+                // 假设数据格式为 {lng: 经度, lat: 纬度, value: 权重}
+                return [item.lng, item.lat, item.value];
+              }),
+              pointSize: 5, // 热力点的大小
+              blurSize: 10, // 热力点的模糊大小
+              width: '100%', // 设置模块宽度为100%使其成为正方形
+              height: '100%' // 设置模块高度为100%使其成为正方形
+            }
+          ],
+          visualMap: visualMapConfig // 使用定义的 visualMap 配置
+        });
+
+        // 增加一天
+        currentDate.setDate(currentDate.getDate() + 1);
+
+        // 如果日期小于等于结束日期，则设置定时器，三秒后渲染下一个文件
+        if (currentDate <= endDate) {
+          setTimeout(switchFile, 300); // 三秒后渲染下一个文件
+        }
+      });
+    }
+
+    // 开始展示第一个文件
+    switchFile();
+
+    // 添加地图缩放和平移事件监听器
+    myChart.on('geoRoam', function (params) {
+      // 获取地图的缩放级别和平移位置
+      var zoom = params.zoom;
+      var x = params.x;
+      var y = params.y;
+
+      // 在这里处理地图缩放和平移事件
+      // 更新数据并重新渲染，保持数据附着在地图上
+      // 您需要根据地图的缩放级别和平移位置来调整数据的缩放和平移
+      console.log('Zoom Level: ' + zoom);
+      console.log('X Coordinate: ' + x);
+      console.log('Y Coordinate: ' + y);
+
+      // 更新数据并重新渲染
+      // 您需要根据缩放级别和平移位置来更新数据
+      // 更新完数据后，调用 myChart.setOption 更新图表
+    });
+  });
+
+</script>
 </body>
 </html>

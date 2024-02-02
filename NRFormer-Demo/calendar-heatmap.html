@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>热力图</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@latest"></script>
+</head>
+<body>
+
+<div style="display: flex;flex-direction: row-reverse;">
+    <select id="csvSelector" style="margin-top: 20px; margin-left: 10px;height: 25px;">
+        <option value="heatMapData/all_japan_heatmap_83.68_106.85.csv">all_japan</option>
+        <option value="heatMapData/三重県_heatmap_11.11_74.07.csv">三重県</option>
+        <option value="heatMapData/京都府_heatmap_33.41_58.0.csv">京都府</option>
+        <option value="heatMapData/佐賀県_heatmap_55.08_77.83.csv">佐賀県</option>
+        <option value="heatMapData/兵庫県_heatmap_0.0_84.38.csv">兵庫県</option>
+        <option value="heatMapData/北海道_heatmap_17.8_48.36.csv">北海道</option>
+        <option value="heatMapData/千葉県_heatmap_39.57_55.96.csv">千葉県</option>
+        <option value="heatMapData/和歌山県_heatmap_37.84_61.24.csv">和歌山県</option>
+        <option value="heatMapData/埼玉県_heatmap_46.25_53.9.csv">埼玉県</option>
+        <option value="heatMapData/大分県_heatmap_35.07_53.85.csv">大分県</option>
+        <option value="heatMapData/大阪府_heatmap_31.71_56.19.csv">大阪府</option>
+        <option value="heatMapData/奈良県_heatmap_39.61_65.91.csv">奈良県</option>
+        <option value="heatMapData/宮城県_heatmap_33.3_50.76.csv">宮城県</option>
+        <option value="heatMapData/宮崎県_heatmap_39.6_55.97.csv">宮崎県</option>
+        <option value="heatMapData/富山県_heatmap_38.55_80.57.csv">富山県</option>
+        <option value="heatMapData/山口県_heatmap_45.93_75.46.csv">山口県</option>
+        <option value="heatMapData/山形県_heatmap_13.58_52.61.csv">山形県</option>
+        <option value="heatMapData/山梨県_heatmap_20.97_40.59.csv">山梨県</option>
+        <option value="heatMapData/岐阜県_heatmap_27.2_77.48.csv">岐阜県</option>
+        <option value="heatMapData/岡山県_heatmap_41.46_71.85.csv">岡山県</option>
+        <option value="heatMapData/岩手県_heatmap_22.05_44.42.csv">岩手県</option>
+        <option value="heatMapData/島根県_heatmap_18.41_66.33.csv">島根県</option>
+        <option value="heatMapData/広島県_heatmap_54.16_75.34.csv">広島県</option>
+        <option value="heatMapData/徳島県_heatmap_9.86_57.59.csv">徳島県</option>
+        <option value="heatMapData/愛媛県_heatmap_29.17_51.7.csv">愛媛県</option>
+        <option value="heatMapData/愛知県_heatmap_55.7_66.64.csv">愛知県</option>
+        <option value="heatMapData/新潟県_heatmap_24.17_73.5.csv">新潟県</option>
+        <option value="heatMapData/東京都_heatmap_24.37_44.51.csv">東京都</option>
+        <option value="heatMapData/栃木県_heatmap_27.71_56.95.csv">栃木県</option>
+        <option value="heatMapData/沖縄県_heatmap_8.15_250.76.csv">沖縄県</option>
+        <option value="heatMapData/滋賀県_heatmap_38.2_61.01.csv">滋賀県</option>
+        <option value="heatMapData/熊本県_heatmap_29.98_53.43.csv">熊本県</option>
+        <option value="heatMapData/石川県_heatmap_32.94_61.38.csv">石川県</option>
+        <option value="heatMapData/神奈川県_heatmap_17.55_37.51.csv">神奈川県</option>
+        <option value="heatMapData/福井県_heatmap_34.69_65.77.csv">福井県</option>
+        <option value="heatMapData/福岡県_heatmap_22.85_66.38.csv">福岡県</option>
+        <option value="heatMapData/福島県_heatmap_95.55_122.92.csv">福島県</option>
+        <option value="heatMapData/秋田県_heatmap_0.0_53.11.csv">秋田県</option>
+        <option value="heatMapData/群馬県_heatmap_20.8_41.55.csv">群馬県</option>
+        <option value="heatMapData/茨城県_heatmap_43.85_53.47.csv">茨城県</option>
+        <option value="heatMapData/長崎県_heatmap_33.77_56.61.csv">長崎県</option>
+        <option value="heatMapData/長野県_heatmap_40.55_61.73.csv">長野県</option>
+        <option value="heatMapData/青森県_heatmap_13.69_40.86.csv">青森県</option>
+        <option value="heatMapData/静岡県_heatmap_37.26_49.39.csv">静岡県</option>
+        <option value="heatMapData/香川県_heatmap_32.4_65.68.csv">香川県</option>
+        <option value="heatMapData/高知県_heatmap_26.11_48.63.csv">高知県</option>
+        <option value="heatMapData/鳥取県_heatmap_34.62_101.93.csv">鳥取県</option>
+        <option value="heatMapData/鹿児島県_heatmap_56.5_73.02.csv">鹿児島県</option>
+
+    </select>
+    <div id="heatmapChart" style="width: 80%; height: 500px; margin: 0 auto;"></div>
+</div>
+
+<script src="heatMapJs/calendar-heatmao-js.js"></script>
+</body>
+</html>
