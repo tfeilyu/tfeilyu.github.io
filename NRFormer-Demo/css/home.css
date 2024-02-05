@@ -10,7 +10,7 @@
 }
 
 .navbar-container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -36,6 +36,7 @@
 
 body {
     font-family: Arial, sans-serif;
+    margin: 0 !important;
 }
 
 
@@ -57,13 +58,16 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     padding: 20px;
     border-radius: 10px;
-    /*margin-top: -60px;*/
+    margin-top: -40px;
     width: 90%;
     background-color: #ffffff;
 }
 
 .home-right {
     width: 45%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #ffffff;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -74,6 +78,15 @@ body {
     width: 100%;
     height: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.right-top-new {
+    width: 100%;
+    height: 50%;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);*/
     background-color: #ffffff;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -110,6 +123,7 @@ body {
 }
 .home-all{
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
 .home-bottom{
@@ -124,7 +138,140 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     border-radius: 10px;
     background-color: #ffffff;
-    width: 90.6%;
-    height: 500px;
+    width: 90%;
+    height: 800px;
     margin: 0 auto;
+}
+
+.item-margin{
+    /*margin: 100px 0;*/
+}
+.item-im-height{
+    height: 370px !important;
+}
+.item-top{
+    margin-top: 130px;
+}
+.item-bottom-{
+    /*margin-bottom: 0px;*/
+}
+
+.card{
+    position: relative;
+    height: 400px;
+    background-color: #fafafa;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    /* 元素纵向排列*/
+    flex-direction: column;
+    /*align-items: center;*/
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    /* 不让其被挤压*/
+    flex-shrink: 0;
+}
+.card .photo img{
+    width: 100%;
+    height: 100%;
+    /* 保持原有尺寸比例，裁切长边*/
+    object-fit: cover;
+}
+/* 默认大图 */
+.card .photo{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+    overflow: hidden;
+    transition: 0.5s;
+}
+/* 鼠标移入变小图 */
+.photo{
+    top:30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}
+/*加一个黑色到透明的渐变背景，可以更清楚的看到名字*/
+.card .photo::before{
+    content:"";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
+/*.card h1{*/
+/*    position: absolute;*/
+/*    top:400px;*/
+/*    transition: 0.5s;*/
+/*}*/
+/*.card h1{*/
+/*    top:60px*/
+/*}*/
+.card-h2 {
+    font-family: Times;
+    color: #4e5155;
+    font-weight: 400;
+    margin-top: 70px;
+    width: 80%;
+    border-bottom: 1px solid rgba(245, 255, 255, 0.3);
+    font-size: 27px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+
+.card p{
+    font-family: Times;
+    width: 100%;
+    font-size: 1.3rem;
+    color: #4f5155;
+    margin-bottom: 15px;
+    line-height: 30px;
+}
+
+.messageCard {
+    overflow-y: scroll;
+    padding: 0 25px;
+}
+.messageCard::-webkit-scrollbar {
+    width: 4px;
+}
+.messageCard::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+}
+.messageCard::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+
+.left-cont-dis{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-fontSize{
+    font-size: 2rem;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #494e52;
+    font-family: Georgia, JiZiJingDianDaBiaoSongJianFan, FangSong, STFangsong, sans-serif;
+}
+
+.footer {
+    background-color: #3f6fdb;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    font-size: 14px;
 }

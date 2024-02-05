@@ -2,24 +2,50 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ECharts Demo</title>
+  <title>NRFormer Demo</title>
   <!-- 引入 ECharts 库 -->
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
   <!-- 引入 jQuery 库 -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
-    /* 设置容器的宽度和高度 */
     #chart-container {
       width: 680px;
-      height: 760px;
+      height: 700px;
       margin: 0 auto;
+    }
+
+    .time-down{
+      display: flex;
+      width: 150px;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 3px 5px;
+      color: #2980B9;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(to right, rgb(178 220 247 / 40%), rgb(178 247 217 / 40%)),rgb(247 228 178 / 40%);
+      top: 250px;
+      left: 50px;
+    }
+
+    #timeDomData{
+
     }
   </style>
 </head>
 <body>
-<!-- 创建一个容器 -->
-<div id="chart-container"></div>
-<!-- 引入 JavaScript 代码 -->
+<div class="content-all">
+  <div class="time-down">
+    <div>
+      <strong>Date:</strong>
+    </div>
+    <div id="timeDomData">
+
+    </div>
+  </div>
+  <div id="chart-container" style="margin-top: -40px;"></div>
+</div>
+
 <script>
   // 获取容器元素
   var container = document.getElementById('chart-container');
@@ -60,23 +86,29 @@
     echarts.registerMap('Japan', geoJson);
 
     function switchFile() {
+      let TimeDom = document.getElementById("timeDomData");
       var folderPath = 'hotPostMapData/';
       var currentFileName = currentDate.toISOString().split('T')[0] + '.json';
+      var titleName = currentDate.toISOString().split('T')[0];
+      TimeDom.innerText = titleName
 
       myChart.setOption({
         title: {
-          text: folderPath + currentFileName,
-          left: 'center'
+          text: 'Japan Daily Radiation Forecast Heatmap',
+          left: 'center',
+          font: 'Times',
         },
         // 设置 legend 位置为 'bottom'，对齐方式为 'right'
         legend: {
           orient: 'horizontal',
           top: 'top',
-          left: 'left'
         },
+        textStyle: {
+          color:'#4a4e52',
+          fontFamily: 'Georgia, JiZiJingDianDaBiaoSongJianFan, FangSong, STFangsong, sans-serif' // 设置主标题整体字体
+        }
       });
 
-      console.log(folderPath + currentFileName);
       // 加载节点数据
       $.get(folderPath + currentFileName, function (nodeData) {
         console.log(nodeData[898]);
@@ -90,7 +122,7 @@
           },
           series: [
             {
-              name: '热力',
+              // name: '热力',
               type: 'heatmap',
               coordinateSystem: 'geo',
               data: nodeData.map(function (item) {

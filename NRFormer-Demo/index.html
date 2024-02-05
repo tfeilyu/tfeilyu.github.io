@@ -11,48 +11,96 @@
 <nav class="navbar">
     <div class="navbar-container">
         <a href="/" class="nav-logo">NRFormer Demo</a>
-        <div class="nav-links">
-            <a class="href-a" href="index.html">Forecasting System</a>
-            <a class="href-a" href="index_data_analysis.html">Data Analysis</a>
+        <div class="nav-links" style="margin-right: -15px;">
+            <a class="href-a" href="index.html"><b>Forecasting System</b></a>
+            <a class="href-a" href="index_data_analysis.html"><b>Data Analysis</b></a>
         </div>
     </div>
 </nav>
 <div class="home-all">
-    <div class="home-con">
+
+    <div class="home-con item-bottom-">
         <div class="home-left">
             <div class="home-left-cont">
                 <iframe class="all-echarts-item" src="heatmap-radiation.html"></iframe>
             </div>
         </div>
-        <div class="home-right">
-            <div class="right-top">
-                <iframe class="all-echarts-item" src="map-sensor_num.html"></iframe>
+        <div class="home-left left-cont-dis" style="margin-top: -40px;">
+            <div class="home-left-cont" style="box-shadow:none;margin-top:-20px;width: 100%;">
+                <div class="card messageCard">
+                    <h1 class="card-fontSize">Paper Information</h1>
+                    <ul style="color: #494e52;margin-top: -30px;">
+                        <li>
+                            <p>
+                                <strong>KDD ADS Papaer Title:</strong><br>
+                                NRFormer: A Spatio-Temporal Graph Transformer for National-Wide Nuclear Radiation Forecasting
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Authors:</strong><br>
+                                    Tengfei LYU, Jindong HAN, Hao LIU*
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Dataset:</strong><br>
+                                    The data and code are available at <a href="https://github.com/usail-hkust/NRFormer." target="_blank">https://github.com/usail-hkust/NRFormer.</a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="right-bottom">
-                <div class="right-left">
-                    <iframe class="all-echarts-item" src="LineChart-sensor_pattern_1mon.html"></iframe>
+
+
+            <div class="home-left-cont" style="box-shadow:none;margin-bottom: -20px;width: 100%;">
+                <div class="card messageCard">
+                     <h1 class="card-fontSize">Paper Information</h1>
+                    <ul style="color: #494e52;margin-top: -30px;">
+                        <li>
+                            <p>
+                                <strong>
+                                    Nuclear radiation (NR), which is energy emitted from atomic nuclei during decay,
+                                </strong>
+                                    sNuclear radiation (NR), which is energy emitted from atomic nuclei during decay, has a significant impact on human health and the environment.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>
+                                    Precise forecasting of nuclear radiation is crucial for both individuals and governments.
+                                    In this study, we introduce NRFormer, an innovative framework designed for forecasting nuclear radiation levels across Japan, addressing critical challenges such as the non-stationary nature of radiation patterns and the uneven distribution of monitoring stations. Incorporating a non-stationary temporal attention module, an event-aware spatial transformer, and a meteorological prompting module, NRFormer adeptly captures complex spatio-temporal dynamics in nuclear radiation. Tested on two comprehensive datasets, NR1D, our approach demonstrates marked superiority over ten state-of-the-art models. This research not only advances the predictive accuracy in environmental safety and public health but also provides a significant methodological contribution to the field of nuclear radiation forecasting, offering insights for enhanced emergency response and environmental monitoring strategies.
+                                </strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>
+                                    The data and code are available at <a href="https://github.com/usail-hkust/NRFormer." target="_blank">https://github.com/usail-hkust/NRFormer.</a>
+                                </strong>
+                            </p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-
-    </div>
-    <div class="home-bottom">
-            <iframe class="all-echarts-item" src="LineChart-sensor_pattern.html"></iframe>
-<!--        <div class="bottom-left">-->
-<!--            <iframe class="all-echarts-item" src="LineChart-sensor_pattern.html"></iframe>-->
-<!--        </div>-->
     </div>
 
-    <div class="hom-bottom-heat">
-        <iframe class="all-echarts-item" src="calendar-heatmap.html"></iframe>
+    <div class="home-con item-bottom-" style="margin-top: -70px">
+        <div class="home-left" style="width: 100%;">
+            <div class="home-left-cont" style="margin: 0 85px;">
+                <iframe class="all-echarts-item" src="map-node_distribution.html"></iframe>
+            </div>
+        </div>
+        <div></div>
     </div>
+
 
 </div>
-
-<!--<div class="chart-container" id="macro-analysis"></div>-->
-
-<!--<script src="js/home.js"></script>-->
-
+<div class="footer">
+    <strong>&copy; HKUST USAIL</strong><br><br>
+    <strong>NRFormer: A Spatio-Temporal Graph Transformer for National-Wide Nuclear Radiation Forecasting<strong>
+</div>
 </body>
 </html>
 
