@@ -9,6 +9,7 @@ var lineChart = echarts.init(lineChartContainer);
 // 当前选中的节点数据
 var currentNodeData = null;
 var originalNodeData = []; // 用于存储原始节点数据
+var earliestDate = null; // 存储所有节点中最早的日期
 
 // 显示地图的加载动画
 myChart.showLoading();
@@ -21,14 +22,28 @@ $.get('json/japan.geojson', function (geoJson) {
     // 加载节点数据
     $.get('json/map-node_distribution/NRFormer_1D-data-v2-3841_test_Sample1_PreGraph_xlx.json', function (nodeData) {
         originalNodeData = nodeData; // 保存原始节点数据
+        earliestDate = findEarliestDate(nodeData); // 寻找所有节点中最早的日期
+
         myChart.setOption(getMapOption(nodeData));
 
-        // 处理地图上的点击事件
+        // 初始化日期选择器，设置最早可选择日期
+        flatpickr("#date-range", {
+            enableTime: true,
+            dateFormat: "Y-m-d",
+            mode: "single",
+            minDate: earliestDate // 设置最早日期
+        });
+
+        // 当点击地图节点时的处理逻辑
         myChart.on('click', function (event) {
             if (event.componentType === 'series' && event.componentSubType === 'scatter') {
-                currentNodeData = event.data; // 保存当前节点的数据
-                updateLineChart(currentNodeData); // 使用全部数据更新折线图
-                updateLineChartPosition(event.event.offsetX, event.event.offsetY); // 更新折线图位置
+                var dateRangeValue = document.getElementById('date-range').value;
+                if (dateRangeValue) { // 检查是否已经选择了日期范围
+                    currentNodeData = event.data; // 保存当前节点的数据
+                    var endDate = calculateEndDate(dateRangeValue);
+                    applyFilter(currentNodeData, dateRangeValue, endDate); // 根据日期范围更新折线图
+                    updateLineChartPosition(event.event.offsetX, event.event.offsetY); // 更新折线图位置
+                }
             }
         });
 
@@ -40,6 +55,28 @@ $.get('json/japan.geojson', function (geoJson) {
         });
     });
 });
+
+// 寻找所有节点中最早的日期
+function findEarliestDate(nodeData) {
+    var earliest = null;
+    nodeData.forEach(function(node) {
+        node.time.forEach(function(dateStr) {
+            var date = new Date(dateStr);
+            if (!earliest || date < earliest) {
+                earliest = date;
+            }
+        });
+    });
+    return earliest ? earliest.toISOString().split('T')[0] : null;
+}
+
+
+// 计算结束日期
+function calculateEndDate(startDateStr) {
+    var startDate = new Date(startDateStr);
+    startDate.setDate(startDate.getDate() + 24); // 在开始日期上加24天
+    return startDate.toISOString().split('T')[0]; // 返回格式化的日期字符串
+}
 
 // 监听地图缩放和平移事件
 myChart.on('geoRoam', function () {
@@ -54,7 +91,7 @@ myChart.on('geoRoam', function () {
 function getMapOption(nodeData, zoom, center) {
     return {
         title:{
-            text: '预测数据图',
+            text: 'Radiation Forecasting System',
             left: 'center'
         },
         geo: {
@@ -95,7 +132,7 @@ function updateLineChart(data) {
             },
         },
         title: {
-            text: '2023年 - '+ data.name,
+            text: data.name,
         },
         xAxis: {
             type: 'category',
@@ -113,7 +150,8 @@ function updateLineChart(data) {
             }
         },
         legend: {
-            data: ['Prediction', 'Ground Truth'],
+            // data: ['Prediction', 'Ground Truth'],
+            data: ['Prediction'],
             left: 'right',
         },
         series: [
@@ -123,12 +161,12 @@ function updateLineChart(data) {
                 // stack: 'Total', // 移除 stack 配置
                 data: data.pre,
             },
-            {
-                name: 'Ground Truth',
-                type: 'line',
-                // stack: 'Total', // 移除 stack 配置
-                data: data.y,
-            }
+            // {
+            //     name: 'Ground Truth',
+            //     type: 'line',
+            //     // stack: 'Total', // 移除 stack 配置
+            //     data: data.y,
+            // }
         ]
     });
 
@@ -180,10 +218,9 @@ makeDraggable(lineChartContainer);
 // 绑定筛选按钮事件
 document.getElementById('filter-button').addEventListener('click', function () {
     var dateRangeValue = document.getElementById('date-range').value;
-    var numItemsValue = document.getElementById('num-items').value;
-
-    if (currentNodeData) {
-        applyFilter(currentNodeData, dateRangeValue, numItemsValue);
+    if (dateRangeValue && currentNodeData) {
+        var endDate = calculateEndDate(dateRangeValue);
+        applyFilter(currentNodeData, dateRangeValue, endDate);
     }
 });
 
@@ -194,28 +231,23 @@ document.getElementById('clear-button').addEventListener('click', function () {
     lineChartContainer.style.display = 'none'; // 清空时关闭折线图
 });
 
-function applyFilter(data, dateRange, numItems) {
-    var dates = dateRange.split(' to ');
-    var startDate = dates[0];
-    var endDate = dates[1];
-    var limit = parseInt(numItems, 10);
-
+function applyFilter(data, startDateStr, endDateStr) {
+    var limit = 24; // 限制数据点数量为24
     var filteredData = {
         time: [],
         pre: [],
         y: [],
-        name: "",
+        name: data.name,
     };
 
     for (var i = 0; i < data.time.length; i++) {
-        if ((!startDate || data.time[i] >= startDate) && (!endDate || data.time[i] <= endDate)) {
-            filteredData.time.push(convertAllDates(data.time[i]));
+        if (data.time[i] >= startDateStr && data.time[i] <= endDateStr) {
+            filteredData.time.push(convertDateFormat(data.time[i]));
             filteredData.pre.push(data.pre[i]);
             filteredData.y.push(data.y[i]);
-            filteredData.name = data.name;
         }
 
-        if (!isNaN(limit) && filteredData.time.length === limit) {
+        if (filteredData.time.length === limit) {
             break;
         }
     }
